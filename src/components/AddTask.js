@@ -3,6 +3,7 @@ import { useState } from 'react'
 const AddTask = ({ onAdd }) => {
     const [text, setText] = useState('')
     const [day, setDay] = useState('')
+    const [category, setCategory] = useState('')
     const [reminder, setReminder] = useState(false)
     const [edit, setEdit] = useState(false)
 
@@ -14,12 +15,13 @@ const AddTask = ({ onAdd }) => {
             return
         }
 
-        onAdd({ text, day, reminder, edit })
+        onAdd({ text, day, reminder, edit, category })
 
         setText('')
         setDay('')
         setReminder(false)
         setEdit(false)
+        setCategory('')
     }
 
     return (
@@ -41,6 +43,15 @@ const AddTask = ({ onAdd }) => {
                     value={day}
                     onChange={(event) => setDay(event.target.value)}
                 />
+            </div>
+            <div className='form-control'>
+                <label for='category'>Category</label>
+                <select name='category' id='category' onChange={(event) => setCategory(event.target.options[event.target.selectedIndex].text)}>
+                    <option value=''>---Select Category---</option>
+                    <option value='0'>Things You Have To Do</option>
+                    <option value='1'>Things You Want To Do</option>
+                    <option value='2'>Things Other People Want You To Do</option>
+                </select>
             </div>
             <div className='form-control form-control-check'>
                 <label>Set Reminder</label>

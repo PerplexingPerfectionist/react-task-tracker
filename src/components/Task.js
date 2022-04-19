@@ -12,6 +12,14 @@ const Task = ({ task, onDelete, onEdit, onToggle }) => {
                 <p>
                     <input type="text" value={task.day} onChange={(value) => onEdit(task.id, 'day', value)} />
                 </p>
+                <p>
+                    <select name='category' id='category' onChange={(value) => onEdit(task.id, 'category', value)}>
+                        <option value=''>--Select Category---</option>
+                        <option value='0'>Things You Have To Do</option>
+                        <option value='1'>Things You Want To Do</option>
+                        <option value='2'>Things Other People Want You To Do</option>
+                    </select>
+                </p>
                 </div>)
             :
                 (<div className='col'>
@@ -20,6 +28,9 @@ const Task = ({ task, onDelete, onEdit, onToggle }) => {
                     </h3>
                     <p>
                         {task.day}
+                    </p>
+                    <p>
+                        {task.category}
                     </p>
                 </div>)
             }
