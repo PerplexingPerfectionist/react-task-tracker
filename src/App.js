@@ -10,7 +10,7 @@ const App = () => {
     {
         id: 1,
         text: 'Doctors Appointment',
-        day: 'Feb 5th at 2:30pm',
+        day: {date: '2022-05-16', time: '10:00'},
         reminder: true,
         edit: false,
         category: 'Things You Want To Do'
@@ -18,7 +18,7 @@ const App = () => {
     {
         id: 2,
         text: 'Meeting at school',
-        day: "Feb 6th at 1:30pm",
+        day: {date: '2022-04-29', time: '08:00'},
         reminder: true,
         edit: false,
         category: 'Things Other People Want You To Do'
@@ -26,7 +26,7 @@ const App = () => {
     {
         id: 3,
         text: 'Food Shopping',
-        day: 'Feb 5th at 2:30pm',
+        day: {date: '2022-04-26', time: '16:00'},
         reminder: false,
         edit: false,
         category: 'Things You Have To Do'
@@ -39,6 +39,7 @@ const addTask = (task) => {
   const newTask = { id, ...task}
 
   setTasks([...tasks, newTask])
+  setShowAddTask(!showAddTask)
 }
 
 //Delete Task
@@ -54,8 +55,10 @@ const editTask = (id, attr, event) => {
         return {...task, edit: !task.edit};
       } else if(task.id === id && attr === 'text') {
         return {...task, text: event.target.value};
-      } else if(task.id === id && attr === 'day') {
-        return {...task, day: event.target.value};
+      } else if(task.id === id && attr === 'day.date') {
+        return {...task, day: {...task.day, date: event.target.value}};
+      } else if(task.id === id && attr === 'day.time') {
+        return {...task, day:{...task.day, time: event.target.value}};
       } else if(task.id === id && attr === 'category') {
         return {...task, category: event.target.options[event.target.selectedIndex].text};
       }

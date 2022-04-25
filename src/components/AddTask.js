@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
 const AddTask = ({ onAdd }) => {
+    let today = new Date()
+
     const [text, setText] = useState('')
-    const [day, setDay] = useState('')
+    const [day, setDay] = useState({date: today.toISOString().slice(0, 10), time: today.toString().slice(16, 21)})
     const [category, setCategory] = useState('')
     const [reminder, setReminder] = useState(false)
     const [edit, setEdit] = useState(false)
@@ -37,15 +39,26 @@ const AddTask = ({ onAdd }) => {
             </div>
             <div className='form-control'>
                 <label>Day & Time</label>
-                <input
+                {/* <input
                     type='text'
                     placeholder='Add Day & Time'
                     value={day}
                     onChange={(event) => setDay(event.target.value)}
+                /> */}
+                <input
+                    type='date'
+                    min={today.toISOString().slice(0, 10)}
+                    value={day.date}
+                    onChange={(event) => setDay({...day, date: event.target.value})}
+                />
+                <input
+                    type='time'
+                    value={day.time}
+                    onChange={(event) => setDay({...day, time: event.target.value})}
                 />
             </div>
             <div className='form-control'>
-                <label for='category'>Category</label>
+                <label>Category</label>
                 <select name='category' id='category' onChange={(event) => setCategory(event.target.options[event.target.selectedIndex].text)}>
                     <option value=''>---Select Category---</option>
                     <option value='0'>Things You Have To Do</option>

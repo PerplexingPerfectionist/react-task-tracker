@@ -113,6 +113,20 @@ body {
   font-size: 17px;
 }
 
+.form-control input[type='date'], .form-control input[type='time'] {
+  -webkit-min-logical-width: calc(100% - 16px);
+}
+
+p input, p select {
+  margin: 3px;
+  padding: 3px 3px;
+  height: 25px;
+}
+
+p input[type='date'], p input[type='time'] {
+  -webkit-min-logical-width: calc(50% - 24px);
+}
+
 .form-control-check {
   display: flex;
   align-items: center;
